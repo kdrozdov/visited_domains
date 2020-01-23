@@ -6,6 +6,8 @@ defmodule VisitedDomains.LinksControllerTest do
 
   require Logger
 
+  alias VisitedDomains.LinksController
+
   describe "post /visited_links" do
     test "returns 200 with correct params" do
       redis_response = {:ok, "google.com;ya.ru;1545221235" }
@@ -17,7 +19,7 @@ defmodule VisitedDomains.LinksControllerTest do
       conn =
         :post
         |> conn("/visited_links")
-        |> VisitedDomains.LinksController.create(data)
+        |> LinksController.create(data)
 
       assert conn.status == 200
     end
@@ -32,7 +34,7 @@ defmodule VisitedDomains.LinksControllerTest do
       conn =
         :post
         |> conn("/visited_links")
-        |> VisitedDomains.LinksController.create(data)
+        |> LinksController.create(data)
 
       assert conn.status == 422
     end
@@ -45,7 +47,7 @@ defmodule VisitedDomains.LinksControllerTest do
       conn =
         :post
         |> conn("/visited_links")
-        |> VisitedDomains.LinksController.create(data)
+        |> LinksController.create(data)
 
       assert conn.status == 422
     end

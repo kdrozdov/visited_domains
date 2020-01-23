@@ -1,7 +1,4 @@
 defmodule VisitedDomains.DomainsRepository do
-  require Logger
-  require IEx
-
   @set_name "visits_set"
 
   def save(domain_list, time) do

@@ -6,12 +6,12 @@ defmodule VisitedDomains.LinksController do
 
     with {:ok, domains} <- VisitedDomains.ParseDomains.execute(params["links"]),
          {:ok, _} <- VisitedDomains.DomainsRepository.save(domains, timestamp) do
-      conn |> send_resp(200, Jason.encode!(%{"status" => "ok"}))
+      conn |> send_resp(200, Jason.encode!(%{status: "ok"}))
     else
       {:error, error} ->
-        conn |> send_resp(422, Jason.encode!(%{"status" => error.message}))
+        conn |> send_resp(422, Jason.encode!(%{status: error.message}))
       _ ->
-        conn |> send_resp(422, Jason.encode!(%{"status" => "error"}))
+        conn |> send_resp(422, Jason.encode!(%{status: "error"}))
     end
 
   end

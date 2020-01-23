@@ -1,21 +1,14 @@
-# VisitStats
+# VisitedDomains
 
-**TODO: Add description**
+**This app is a part of job interview**
 
-## Installation
+## Running
 
-If [available in Hex](https://hex.pm/docs/publish), the package can be installed
-by adding `visit_stats` to your list of dependencies in `mix.exs`:
+To run this project use next commands:
 
-```elixir
-def deps do
-  [
-    {:visit_stats, "~> 0.1.0"}
-  ]
-end
+```
+mix deps.get
+mix run --no-halt
 ```
 
-Documentation can be generated with [ExDoc](https://github.com/elixir-lang/ex_doc)
-and published on [HexDocs](https://hexdocs.pm). Once published, the docs can
-be found at [https://hexdocs.pm/visit_stats](https://hexdocs.pm/visit_stats).
-
+Don't forget to run redis server. App uses default redis address: ```redis://localhost:6379```

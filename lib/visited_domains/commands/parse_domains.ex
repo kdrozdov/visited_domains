@@ -11,6 +11,7 @@ defmodule VisitedDomains.ParseDomains do
         |> Enum.map(&add_missing_sheme/1)
         |> Enum.map(&parse_link/1)
         |> Enum.filter(&(&1 != ""))
+
       {:ok, domains}
     rescue
       e in RuntimeError -> {:error, e.message}

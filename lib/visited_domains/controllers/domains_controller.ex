@@ -10,6 +10,7 @@ defmodule VisitedDomains.DomainsController do
     else
       {:error, error} ->
         conn |> send_resp(422, Jason.encode!(%{status: error.message}))
+
       _ ->
         conn |> send_resp(422, Jason.encode!(%{status: "error"}))
     end
@@ -21,7 +22,8 @@ defmodule VisitedDomains.DomainsController do
 
   defp validate_params(params) do
     required_keys = ["from", "to"]
-    with true <- Enum.all?(required_keys, fn (key) -> params[key] != nil end),
+
+    with true <- Enum.all?(required_keys, fn key -> params[key] != nil end),
          {_num, _} <- Integer.parse(params["from"]),
          {_num, _} <- Integer.parse(params["to"]) do
       {:ok}

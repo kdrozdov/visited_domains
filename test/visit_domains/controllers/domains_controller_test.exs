@@ -9,7 +9,7 @@ defmodule VisitedDomains.DomainsControllerTest do
   describe "get /visited_domains" do
     test "returns 200 with correct params" do
       redis_response = "google.com;ya.ru;habr.ru;1545221235"
-      Redix |> expect(:command, fn(_conn, _command) -> {:ok, [redis_response] } end)
+      Redix |> expect(:command, fn _conn, _command -> {:ok, [redis_response]} end)
       params = %{"from" => "1545221232", "to" => "1545221238"}
 
       conn =
@@ -32,7 +32,7 @@ defmodule VisitedDomains.DomainsControllerTest do
 
     test "returns 422 with invalid params" do
       redis_response = "google.com;ya.ru;habr.ru;1545221235"
-      Redix |> expect(:command, fn(_conn, _command) -> {:ok, [redis_response] } end)
+      Redix |> expect(:command, fn _conn, _command -> {:ok, [redis_response]} end)
       params = %{"from" => "invalid", "to" => "1545221238"}
 
       conn =
@@ -48,7 +48,7 @@ defmodule VisitedDomains.DomainsControllerTest do
 
     test "returns 422 when redis error occurs" do
       redis_response = {:error, %{message: "connection error"}}
-      Redix |> expect(:command, fn(_, _) -> redis_response end)
+      Redix |> expect(:command, fn _, _ -> redis_response end)
       params = %{"from" => "1545221232", "to" => "1545221238"}
 
       conn =

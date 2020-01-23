@@ -8,8 +8,9 @@ defmodule VisitedDomains.LinksControllerTest do
 
   describe "post /visited_links" do
     test "returns 200 with correct params" do
-      redis_response = {:ok, "google.com;ya.ru;1545221235" }
-      Redix |> expect(:command, fn(_conn, _options) -> redis_response end)
+      redis_response = {:ok, "google.com;ya.ru;1545221235"}
+      Redix |> expect(:command, fn _conn, _options -> redis_response end)
+
       data = %{
         "links" => ["google.ru", "ya.ru"]
       }
@@ -24,7 +25,8 @@ defmodule VisitedDomains.LinksControllerTest do
 
     test "returns 422 when data saving is failed" do
       redis_response = {:error, %{message: "connection error"}}
-      Redix |> expect(:command, fn(_, _) -> redis_response end)
+      Redix |> expect(:command, fn _, _ -> redis_response end)
+
       data = %{
         "links" => ["google.ru", "ya.ru"]
       }
@@ -38,8 +40,8 @@ defmodule VisitedDomains.LinksControllerTest do
     end
 
     test "returns 422 when params are not passed" do
-      redis_response = {:ok, "google.com;ya.ru;1545221235" }
-      Redix |> expect(:command, fn(_, _) -> redis_response end)
+      redis_response = {:ok, "google.com;ya.ru;1545221235"}
+      Redix |> expect(:command, fn _, _ -> redis_response end)
       data = %{}
 
       conn =

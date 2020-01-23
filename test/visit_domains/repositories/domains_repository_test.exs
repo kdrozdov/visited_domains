@@ -10,7 +10,7 @@ defmodule VisitedDomains.DomainsRepositoryTest do
   describe "find_visited_domains" do
     test "returns visited domains" do
       redis_response = "google.com;ya.ru;funbox.com;1545221235"
-      Redix |> expect(:command, fn(_conn, _command) -> {:ok, [redis_response] } end)
+      Redix |> expect(:command, fn _conn, _command -> {:ok, [redis_response]} end)
 
       {:ok, result} = DomainsRepository.find_visited_domains("1545221234", "1545221238")
       assert result == ["funbox.com", "google.com", "ya.ru"]

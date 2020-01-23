@@ -2,7 +2,7 @@ defmodule VisitedDomains.LinksController do
   import Plug.Conn
 
   def create(conn, params) do
-    timestamp = DateTime.utc_now |> DateTime.to_unix
+    timestamp = DateTime.utc_now() |> DateTime.to_unix()
 
     with {:ok, domains} <- VisitedDomains.ParseDomains.execute(params["links"]),
          {:ok, _} <- VisitedDomains.DomainsRepository.save(domains, timestamp) do
@@ -10,9 +10,9 @@ defmodule VisitedDomains.LinksController do
     else
       {:error, error} ->
         conn |> send_resp(422, Jason.encode!(%{status: error.message}))
+
       _ ->
         conn |> send_resp(422, Jason.encode!(%{status: "error"}))
     end
-
   end
 end

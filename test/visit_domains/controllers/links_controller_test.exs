@@ -4,8 +4,6 @@ defmodule VisitedDomains.LinksControllerTest do
 
   import Mox
 
-  require Logger
-
   alias VisitedDomains.LinksController
 
   describe "post /visited_links" do

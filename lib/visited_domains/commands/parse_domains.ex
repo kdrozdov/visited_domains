@@ -2,6 +2,8 @@ defmodule VisitedDomains.ParseDomains do
   @scheme_regex ~r/^http[s]?:\/\/*/
   @default_scheme "https://"
 
+  def execute(nil), do: {:error, %{message: "argument can't be nil"}}
+
   def execute(link_list) do
     try do
       domains =

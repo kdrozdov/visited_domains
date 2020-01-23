@@ -3,12 +3,16 @@ defmodule VisitedDomains.ParseDomains do
   @default_scheme "https://"
 
   def execute(link_list) do
-    domains =
-      link_list
-      |> Enum.map(&add_missing_sheme/1)
-      |> Enum.map(&parse_link/1)
-      |> Enum.filter(&(&1 != ""))
-    {:ok, domains}
+    try do
+      domains =
+        link_list
+        |> Enum.map(&add_missing_sheme/1)
+        |> Enum.map(&parse_link/1)
+        |> Enum.filter(&(&1 != ""))
+      {:ok, domains}
+    rescue
+      e in RuntimeError -> {:error, e.message}
+    end
   end
 
   defp parse_link(link) do

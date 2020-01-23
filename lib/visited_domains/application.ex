@@ -11,7 +11,7 @@ defmodule VisitedDomains.Application do
   defp children do
     [
       VisitedDomains.Endpoint,
-      {VisitedDomains.Redis.RedixClient, name: :redix}
+      {Redix, name: :redix}
     ]
   end
 

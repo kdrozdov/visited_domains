@@ -1,3 +1,3 @@
-# Mox.defmock(.CalcMock, for: MyApp.Calculator)
+Mox.defmock(Redix, for: VisitedDomains.Redis.ClientBehaviour)
 
 ExUnit.start()

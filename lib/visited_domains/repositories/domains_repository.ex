@@ -1,5 +1,4 @@
 defmodule VisitedDomains.DomainsRepository do
-  alias VisitedDomains.Redis.RedixClient
   require Logger
   require IEx
 
@@ -7,12 +6,11 @@ defmodule VisitedDomains.DomainsRepository do
 
   def save(domain_list, time) do
     key = create_data_key(domain_list, time)
-    Logger.info(key)
-    RedixClient.command(:redix, ["ZADD", @set_name, time, key])
+    Redix.command(:redix, ["ZADD", @set_name, time, key])
   end
 
   def find_visited_domains(from, to) do
-    case RedixClient.command(:redix, ["ZRANGEBYSCORE", @set_name, from, to]) do
+    case Redix.command(:redix, ["ZRANGEBYSCORE", @set_name, from, to]) do
       {:ok, results} -> combine_results(results, MapSet.new())
       {:error, error} -> {:error, error}
     end

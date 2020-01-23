@@ -8,7 +8,7 @@ defmodule VisitedDomains.ParseDomainsTest do
   ]
 
   test "parses domains" do
-    {:ok, result} = VisitedDomains.ParseDomains.execute(@uri_list)
+    {:ok, result} = VisitedDomains.ParseDomains.execute(@link_list)
     assert result == ["ya.ru", "funbox.ru", "stackoverflow.com"]
   end
 end
